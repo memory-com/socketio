@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/sirupsen/logrus"
 	"github.com/pschlump/godebug"
+	"github.com/sirupsen/logrus"
 )
 
 // PJS - could have it return more than just an error, if "rmsg" and "rbody" - then emit response?
@@ -359,9 +359,9 @@ func (h *socketHandler) onAck(id int, decoder *decoder, packet *packet) error {
 	return nil
 }
 
-const db1 = true
+const db1 = false
 
-var DbLogMessage = true
-var LogMessage = true
+var DbLogMessage = false
+var LogMessage = false
 
 /* vim: set noai ts=4 sw=4: */

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/pschlump/socketio/engineio"
+	"github.com/memory-com/pschlump/engineio"
 
 	. "github.com/smartystreets/goconvey/convey"
 )
