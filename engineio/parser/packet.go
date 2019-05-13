@@ -109,7 +109,7 @@ func (e *PacketEncoder) Write(p []byte) (int, error) {
 	return e.w.Write(p)
 }
 
-var closeLocker sync.Locker
+var closeLocker sync.Mutex
 
 // Close closes the encoder.
 func (e *PacketEncoder) Close() error {
