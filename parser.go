@@ -8,8 +8,9 @@ import (
 	"io/ioutil"
 	"strconv"
 
+	"github.com/memory-com/socketio/engineio"
+
 	"github.com/pschlump/json" //	"encoding/json"
-	"github.com/memory-com/pschlump/engineio"
 )
 
 const Protocol = 4
