@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io"
+	"sync"
 
 	"github.com/memory-com/socketio/engineio/message"
 )
@@ -108,8 +109,12 @@ func (e *PacketEncoder) Write(p []byte) (int, error) {
 	return e.w.Write(p)
 }
 
+var closeLocker sync.Locker
+
 // Close closes the encoder.
 func (e *PacketEncoder) Close() error {
+	closeLocker.Lock()
+	defer closeLocker.Unlock()
 	if e.closer != nil {
 		return e.closer.Close()
 	}
