@@ -8,10 +8,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pschlump/json" //	"encoding/json"
 	"github.com/memory-com/socketio/engineio/message"
 	"github.com/memory-com/socketio/engineio/parser"
 	"github.com/memory-com/socketio/engineio/transport"
+	"github.com/pschlump/json" //	"encoding/json"
 )
 
 type MessageType message.MessageType
@@ -147,6 +147,8 @@ func (c *serverConn) NextWriter(t MessageType) (io.WriteCloser, error) {
 	default:
 		return nil, io.EOF
 	}
+	c.writerLocker.Lock()
+	defer c.writerLocker.Unlock()
 	ret, err := c.getCurrent().NextWriter(message.MessageType(t), parser.MESSAGE)
 	return ret, err
 }

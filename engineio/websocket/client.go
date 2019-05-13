@@ -35,6 +35,9 @@ func (c *client) Response() *http.Response {
 }
 
 func (c *client) NextReader() (*parser.PacketDecoder, error) {
+	mtx.Lock()
+	defer mtx.Unlock()
+
 	var reader io.Reader
 	for {
 		t, r, err := c.conn.NextReader()
@@ -56,6 +59,9 @@ func (c *client) NextWriter(msgType message.MessageType, packetType parser.Packe
 	if msgType == message.MessageBinary {
 		wsType, newEncoder = websocket.BinaryMessage, parser.NewBinaryEncoder
 	}
+
+	mtx.Lock()
+	defer mtx.Unlock()
 
 	w, err := c.conn.NextWriter(wsType)
 	if err != nil {
